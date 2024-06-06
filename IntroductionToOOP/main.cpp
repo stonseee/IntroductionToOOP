@@ -58,19 +58,11 @@ public:
 		cout << "x = " << x << "\tY = " << y << endl;
 	}
 
-	double distance(double x, double y)
+	double distance(Point& B)
 	{
-		return sqrt((pow((x - this->x), 2)) + (pow((y - this->y), 2)));
-	}
-
-	/*double distance(double x, double y, double x1, double y1)
-	{
-		this->x = x;
-		this->y = y;		
-		return sqrt((pow((x1 - this->x), 2)) + (pow((y1 - this->y), 2)));
-	}*/
+		return sqrt((pow((B.get_x() - this->x), 2)) + (pow((B.get_y() - this->y), 2)));
+	}	
 };
-
 
 double distance(Point& A, Point& B)
 {
@@ -113,9 +105,10 @@ void main()
 	Point D(-4, 3);
 	C.print();
 
-	cout << "distanceToPoint = " << C.distance(-4, 3) << endl;
+	//cout << "distanceToPoint = " << C.distance(-4, 3) << endl;
 	//cout << "distanceBetweenPoints = " << C.distance(2, -5, -4, 3) << endl;
 
+	cout << "distanceToPoint = " << C.distance(D) << endl;
 	cout << "distanceBetweenPoints = " << distance(C, D) << endl;
 
 }
