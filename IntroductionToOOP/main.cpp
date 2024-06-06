@@ -63,13 +63,19 @@ public:
 		return sqrt((pow((x - this->x), 2)) + (pow((y - this->y), 2)));
 	}
 
-	double distance(double x, double y, double x1, double y1)
+	/*double distance(double x, double y, double x1, double y1)
 	{
 		this->x = x;
 		this->y = y;		
 		return sqrt((pow((x1 - this->x), 2)) + (pow((y1 - this->y), 2)));
-	}
+	}*/
 };
+
+
+double distance(Point& A, Point& B)
+{
+	return sqrt((pow((B.get_x() - A.get_x()), 2)) + (pow((B.get_y() - A.get_y()), 2)));
+}
 
 //#define STRUCT_POINT
 
@@ -104,9 +110,12 @@ void main()
 	B.print();
 
 	Point C(2, -5);
+	Point D(-4, 3);
 	C.print();
 
 	cout << "distanceToPoint = " << C.distance(-4, 3) << endl;
-	cout << "distanceBetweenPoints = " << C.distance(2, -5, -4, 3) << endl;
+	//cout << "distanceBetweenPoints = " << C.distance(2, -5, -4, 3) << endl;
+
+	cout << "distanceBetweenPoints = " << distance(C, D) << endl;
 
 }
