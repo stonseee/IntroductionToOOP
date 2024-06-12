@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -8,8 +8,8 @@ class Fraction
 {
 private:
 
-    double num;       //числитель
-    double denom;     //знаменатель
+    double num;       //С‡РёСЃР»РёС‚РµР»СЊ
+    double denom;     //Р·РЅР°РјРµРЅР°С‚РµР»СЊ
 
 public:
 
