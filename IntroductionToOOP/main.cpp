@@ -81,7 +81,24 @@ public:
 		this->y = other.y;
 		cout << "operator=\t" << this << endl;
 
+		return *this;                                    
+	}
+
+	Point& operator++()
+	{
+		this->x++;
+		this->y++;
+
 		return *this;
+	}
+
+	Point operator++(int)
+	{
+		Point old = *this;
+		this->x++;
+		this->y++;
+
+		return old;
 	}
 };
 
@@ -90,10 +107,37 @@ double distance(const Point& A, const  Point& B)
 	return sqrt((pow((B.get_x() - A.get_x()), 2)) + (pow((B.get_y() - A.get_y()), 2)));
 }
 
+Point operator+(const Point& left, const Point& right)
+{
+	Point result;
+	result.set_x(left.get_x() + right.get_x());
+	result.set_y(left.get_y() + right.get_y());
+
+	return result;
+}
+
+bool operator==(const Point& left, const Point& right)
+{
+	/*if (left.get_x() == right.get_x() && left.get_y() == right.get_y())
+		return true;
+	else
+		return false;*/
+
+	return (left.get_x() == right.get_x() && left.get_y() == right.get_y());
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& obj)
+{
+	return os << "X = " << obj.get_x() << "\tY = " << obj.get_y() << endl;
+}
+
+
 //#define STRUCT_POINT
 //#define CONSTRUCTORS_CHECK
 //#define DISTANCE_CHECK
-#define ASSIGNMENT_CHECK
+//#define ASSIGNMENT_CHECK
+//#define ARITHMETICAL_OPERATORS_CHECK
+//#define COMPARISON_OPERATORS_CHECK
 
 void main()
 {
@@ -186,4 +230,36 @@ void main()
 	cout << delimiter << endl;
 
 #endif
+
+#ifdef ARITHMETICAL_OPERATORS_CHECK
+
+	Point A(2, 3);
+	A.print();
+
+	Point B(7, 8);
+	B.print();
+
+	Point C = A + B;
+	C.print();
+
+	//++C;
+	Point D = C++;
+	C.print();
+	D.print();
+
+#endif 
+
+#ifdef COMPARISON_OPERATORS_CHECK
+
+	//cout << (2 == 3) << endl;
+	Point A(2, 3);
+	Point B(7, 8);
+	cout << (A == B) << endl;
+	//cout << (Point(2, 3) == Point(3, 3)) << endl;  
+
+#endif 
+
+	Point A(2, 3);
+	
+	cout << A << endl;
 }
