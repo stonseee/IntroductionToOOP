@@ -79,18 +79,7 @@ public:
         this->num = this->num + this->denom;
         
         return old;
-    }
-        
-    //const Fraction& operator-(const Fraction& f);
-    //const Fraction& operator/(const Fraction& f);
-    //const Fraction& operator*(const Fraction& f);
-    //const Fraction& operator+=(const Fraction& f);
-    //const Fraction& operator-=(const Fraction& f);
-    //const Fraction& operator*=(const Fraction& f);
-    //const Fraction& operator/=(const Fraction& f);
-    //Fraction operator-();    
-    //friend istream& operator>> (istream& input, Fraction& fr);
-
+    }      
 };
 
 Fraction operator+(const Fraction& left, const Fraction& right)
@@ -98,6 +87,30 @@ Fraction operator+(const Fraction& left, const Fraction& right)
     Fraction result;
     result.set_num((left.get_num() * right.get_denom()) + (right.get_num() * left.get_denom()));
     result.set_denom(left.get_denom() * right.get_denom());
+    return result;
+}
+
+Fraction operator-(const Fraction& left, const Fraction& right)
+{
+    Fraction result;
+    result.set_num((left.get_num() * right.get_denom()) - (right.get_num() * left.get_denom()));
+    result.set_denom(left.get_denom() * right.get_denom());
+    return result;
+}
+
+Fraction operator*(const Fraction& left, const Fraction& right)
+{
+    Fraction result;
+    result.set_num(left.get_num() * right.get_num());
+    result.set_denom(left.get_denom() * right.get_denom());
+    return result;
+}
+
+Fraction operator/(const Fraction& left, const Fraction& right)
+{
+    Fraction result;
+    result.set_num(left.get_num() * right.get_denom());
+    result.set_denom(left.get_denom() * right.get_num());
     return result;
 }
 
@@ -124,7 +137,7 @@ void main()
     //++chicago;
     johnny++;
 
-    starship = chicago + johnny;
+    starship = chicago * johnny;
 
     chicago.print();
     johnny.print();
