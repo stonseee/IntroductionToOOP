@@ -146,7 +146,19 @@ bool operator==(Fraction& left, Fraction& right)
 {   
     left.to_improper();
     right.to_improper();
-    return (double)left.get_numerator() / (double)left.get_denominator() == (double)right.get_numerator() / (double)right.get_denominator();
+    if ((double)left.get_numerator() / (double)left.get_denominator() == (double)right.get_numerator() / (double)right.get_denominator())
+    {
+        left.to_proper();
+        right.to_proper();
+        return true;
+    }
+    else
+    {
+        left.to_proper();
+        right.to_proper();
+        return false;
+    }
+    
 }
 
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
