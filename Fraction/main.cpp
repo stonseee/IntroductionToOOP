@@ -142,8 +142,10 @@ Fraction operator-(Fraction& left, Fraction& right)
     return result.to_proper();
 }
 
-bool operator==(const Fraction& left, const Fraction& right)
+bool operator==(Fraction& left, Fraction& right)
 {   
+    left.to_improper();
+    right.to_improper();
     return (double)left.get_numerator() / (double)left.get_denominator() == (double)right.get_numerator() / (double)right.get_denominator();
 }
 
@@ -192,8 +194,8 @@ void main()
     Fraction C = A + B;
     C.print();
 
-    Fraction D(1, 2, 3);
-    Fraction E(10, 4);
+    Fraction D(1, 2, 4);
+    Fraction E(6, 4);
     D.print();
     E.print();
 
