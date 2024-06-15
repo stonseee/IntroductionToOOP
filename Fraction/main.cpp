@@ -157,8 +157,7 @@ bool operator==(Fraction& left, Fraction& right)
         left.to_proper();
         right.to_proper();
         return false;
-    }
-    
+    }    
 }
 
 std::ostream& operator<<(std::ostream& os, const Fraction& obj)
