@@ -85,10 +85,21 @@ public:
     {        
         return *this = *this * other;
     }
-
     Fraction& operator/=(Fraction& other)
     {
         return *this = *this / other;
+    }
+    friend istream& operator>>(istream& input, Fraction& obj)
+    {
+        cout << "input integer:";
+        input >> obj.integer;
+
+        cout << "input numerator:";
+        input >> obj.numerator;
+
+        cout << "input denominator:";
+        input >> obj.denominator;
+        return input;
     }
 
     //methods
@@ -216,6 +227,17 @@ bool operator<=(const Fraction& left, const Fraction& right)
     return !(left > right);
 }
 
+std::ostream& operator<<(std::ostream& os, const Fraction& obj)
+{
+    if (obj.get_integer() && (obj.get_numerator() == 0))return os << obj.get_integer() << endl;
+    if (obj.get_numerator() != 0)
+    {
+        if (obj.get_integer())return os << obj.get_integer() << "(" << obj.get_numerator() << "/" << obj.get_denominator() << ")" << endl;
+        else if (obj.get_integer() == 0)return os << obj.get_numerator() << "/" << obj.get_denominator() << endl;
+    }
+    else if (obj.get_integer() == 0)return os << 0 << endl;
+}
+
 //#define CONSTRUCTORS_CHECK
 //#define ARITHMETICAL_OPERATORS_CHECK
 
@@ -256,5 +278,9 @@ void main()
 
 #endif // ARITHMETICAL_OPERATORS_CHECK
 
+    Fraction pupa;
     cout << (Fraction(1, 2) <= Fraction(5, 10)) << endl;
+    cout << Fraction(1, 2) << endl;
+    cin >> pupa;
+    cout << pupa;
 };
