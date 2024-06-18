@@ -1,4 +1,5 @@
-﻿#include<iostream>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -89,7 +90,7 @@ public:
     {
         return *this = *this / other;
     }
-    friend istream& operator>>(istream& input, Fraction& obj)
+    /*friend istream& operator>>(istream& input, Fraction& obj)
     {
         cout << "input integer:";
         input >> obj.integer;
@@ -100,7 +101,7 @@ public:
         cout << "input denominator:";
         input >> obj.denominator;
         return input;
-    }
+    }*/
 
     //methods
     Fraction& to_improper()
@@ -236,6 +237,32 @@ std::ostream& operator<<(std::ostream& os, const Fraction& obj)
         else if (obj.get_integer() == 0)return os << obj.get_numerator() << "/" << obj.get_denominator() << endl;
     }
     else if (obj.get_integer() == 0)return os << 0 << endl;
+}
+std::istream& operator>>(std::istream& is, Fraction& obj)
+{
+    /*int integer, numerator, denominator;
+    is >> integer >> numerator >> denominator;
+    obj = Fraction(integer, numerator, denominator);*/
+    const int SIZE = 256;
+    char buffer[SIZE] = {};
+    //is >> buffer;
+    is.getline(buffer, SIZE);
+
+    int numbers[3] = {};
+    int n = 0;
+    const char delimiters[] = " /()";
+    for (char* pch = strtok(buffer, delimiters); pch; pch = strtok(NULL, delimiters))
+        numbers[n++] = atoi(pch);
+    //for (int i = 0; i < n; i++) cout << numbers[i] << "\t"; cout << endl;
+
+    switch (n)
+    {
+    case 1: obj = Fraction(numbers[0]); break;
+    case 2: obj = Fraction(numbers[0], numbers[1]); break;
+    case 3: obj = Fraction(numbers[0], numbers[1], numbers[2]); break;
+    }
+
+    return is;
 }
 
 //#define CONSTRUCTORS_CHECK
