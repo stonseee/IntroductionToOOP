@@ -64,12 +64,15 @@ public:
         set_denominator(1);
         cout << "singleArgConstructor\t" << this << endl;
     }
-    explicit Fraction(double number)
+    Fraction(double decimal)
     {
-        this->integer = (int)number;
-        this->numerator = (number - (int)number) * 1000;
-        set_denominator(1000);
-        cout << "singleArgConstructor\t" << this << endl;
+        decimal += 1e-10;
+        this->integer = decimal;
+        decimal -= integer;
+        this->denominator = 1e+9;
+        this->numerator = decimal * this->denominator;
+        reduce();
+        cout << "doubleConstructor\t" << this << endl;
     }
     Fraction(int numerator, int denominator)
     {
@@ -374,7 +377,7 @@ void main()
 
 #ifdef CONVERSIONS_HOME_WORK
 
-    Fraction A = Fraction(2.75).reduce();
+    Fraction A = 3.333;
 
     cout << A << endl;
 
