@@ -47,8 +47,16 @@ public:
 		this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++) this->str[i] = other.str[i];
-		cout << "copyConstructor" << this << endl;
+		cout << "copyConstructor\t" << this << endl;
+	}
+	String(String&& other)noexcept
+	{
+		this->size = other.size;
+		this->str = other.str;
 
+		other.str = 0;
+		other.str = nullptr;
+		cout << "moveConstructor\t\t" << this << endl;
 	}
 	~String()
 	{		
@@ -60,6 +68,7 @@ public:
 	String& operator=(const String& other)
 	{
 		if (this == &other) return *this;
+		delete[] this->str;
 		this->size = other.size;
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++) this->str[i] = other.str[i];		
@@ -67,12 +76,11 @@ public:
 		return *this;
 	}
 
-	char operator[](const int idx) const
+	const char& operator[](int idx) const
 	{
 		return this->str[idx];
 	}
-
-	char& operator[](const int idx)
+	char& operator[](int idx)
 	{
 		return this->str[idx];
 	}
@@ -90,6 +98,7 @@ public:
 
 String operator+(const String& left, const String& right)
 {
+	cout << "operator+" << endl;
 	String buffer(left.get_size() + right.get_size() - 1);
 
 	for (int i = 0; i < left.get_size(); i++)
@@ -97,7 +106,7 @@ String operator+(const String& left, const String& right)
 		buffer[i] = left[i];
 	}
 	for (int i = 0; i < right.get_size(); i++)
-		buffer[i + left.get_size() - 1] = right[i];
+		buffer[i + left.get_size() - 1] = right[i];	
 	return buffer;
 }
 
@@ -106,10 +115,14 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 	return os << obj.get_str();
 }
 
+//#define NO_NAME
+#define OPERATOR_PLUS_CHECK
+
 void main()
 {
     setlocale(LC_ALL, "");
 
+#ifdef NO_NAME
 	String str1;
 	str1.print();
 
@@ -131,5 +144,21 @@ void main()
 	String str5;
 	str5 = str3 + str4;
 	str5.print();
-	cout << str5 << endl;
+	//cout << str5 << endl;
+#endif // NO_NAME
+
+#ifdef OPERATOR_PLUS_CHECK
+	String str1 = "Hello";
+	String str2 = "World";
+
+	cout << delimiter << endl;
+	String str3 = str1 + str2;
+	cout << str3 << endl;
+	cout << delimiter << endl;
+
+	cout << str1 << endl;
+	cout << str2 << endl;
+
+#endif //OPERATOR_PLUS_CHECK
+
 }
