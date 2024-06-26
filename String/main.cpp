@@ -54,7 +54,7 @@ public:
 		this->size = other.size;
 		this->str = other.str;
 
-		other.str = 0;
+		other.size = 0;
 		other.str = nullptr;
 		cout << "moveConstructor\t\t" << this << endl;
 	}
@@ -73,6 +73,17 @@ public:
 		this->str = new char[size] {};
 		for (int i = 0; i < size; i++) this->str[i] = other.str[i];		
 		cout << "copyAssignment\t\t" << this << endl;
+		return *this;
+	}
+	String& operator=(String&& other)noexcept
+	{
+		if (this == &other) return *this;		
+		delete this->str;
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		cout << "moveAssignment\t\t" << this << endl;
 		return *this;
 	}
 
@@ -116,7 +127,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 }
 
 //#define NO_NAME
-#define OPERATOR_PLUS_CHECK
+//#define OPERATOR_PLUS_CHECK
 
 void main()
 {
@@ -148,6 +159,7 @@ void main()
 #endif // NO_NAME
 
 #ifdef OPERATOR_PLUS_CHECK
+
 	String str1 = "Hello";
 	String str2 = "World";
 
@@ -160,5 +172,9 @@ void main()
 	cout << str2 << endl;
 
 #endif //OPERATOR_PLUS_CHECK
+
+	String str1 = "Hello";	
+	str1 = String{ "World" };
+	cout << str1 << endl;
 
 }
