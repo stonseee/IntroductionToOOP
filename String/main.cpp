@@ -29,30 +29,30 @@ public:
 	}
 	
 	//constructors
-	explicit String(int size = 80)
+	explicit String(int size = 80) : size(size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		//this->size = size;
+		//this->str = new char[size] {};
 		cout << "defaultConstructor\t" << this << endl;
 	}
-	String(const char str[])
+	String(const char str[]) : size(strlen(str) + 1), str(new char[size] {})
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++)this->str[i] = str[i];
 		cout << "constructor\t\t" << this << endl;
 	}
-	String(const String& other)
+	String(const String& other) : size(other.size), str(new char[size] {})
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
+		//this->size = other.size;
+		//this->str = new char[size] {};
 		for (int i = 0; i < size; i++) this->str[i] = other.str[i];
-		cout << "copyConstructor\t" << this << endl;
+		cout << "copyConstructor\t\t" << this << endl;
 	}
-	String(String&& other)noexcept
+	String(String&& other)noexcept : size(other.size), str(other.str)
 	{
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 
 		other.size = 0;
 		other.str = nullptr;
@@ -128,6 +128,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 
 //#define NO_NAME
 #define OPERATOR_PLUS_CHECK
+//#define CALLING_CONSTRUCTORS
 
 void main()
 {
@@ -168,11 +169,37 @@ void main()
 	cout << delimiter << endl;
 	str3 = str1 + str2;	
 	cout << delimiter << endl;	
+	cout << str3 << endl;
 
 #endif //OPERATOR_PLUS_CHECK
 
-	/*String str1 = "Hello";	
-	str1 = String{ "World" };
-	cout << str1 << endl;*/
+#ifdef CALLING_CONSTRUCTORS
+	
+	String str1;
+	str1.print();
+
+	//String str2 = 8;
+	String str2(8);
+	str2.print();
+
+	String str3 = "Hello";
+	str3.print();
+
+	String str4(); //no constructor объ€вл€етс€ функци€ str4() котора€ возвращает значение типа 'String'
+	//str4.print(); 
+
+	String str5{}; //defaultConstructor
+	str5.print();
+
+	//любой конструктор можно вызвать () или {}
+
+	//String str6 = str3;
+	//String str6(str3);
+	String str6{ str3 };
+	str6.print();
+
+#endif // CALLING_CONSTRUCTORS
+
+
 
 }
