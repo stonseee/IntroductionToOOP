@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -185,13 +185,13 @@ void main()
 	String str3 = "Hello";
 	str3.print();
 
-	String str4(); //no constructor объявляется функция str4() которая возвращает значение типа 'String'
+	String str4(); //no constructor РѕР±СЉСЏРІР»СЏРµС‚СЃСЏ С„СѓРЅРєС†РёСЏ str4() РєРѕС‚РѕСЂР°СЏ РІРѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ С‚РёРїР° 'String'
 	//str4.print(); 
 
 	String str5{}; //defaultConstructor
 	str5.print();
 
-	//любой конструктор можно вызвать () или {}
+	//Р»СЋР±РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РјРѕР¶РЅРѕ РІС‹Р·РІР°С‚СЊ () РёР»Рё {}
 
 	//String str6 = str3;
 	//String str6(str3);
