@@ -131,7 +131,7 @@ std::ostream& operator<<(std::ostream& os, const String& obj)
 #define CALLING_CONSTRUCTORS
 
 void main()
-{
+ {
     setlocale(LC_ALL, "");
 
 #ifdef NO_NAME
